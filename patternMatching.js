@@ -1,6 +1,7 @@
 const fs = require('fs');
 
 module.exports.stringRepeatCheck = function(inputFile, file) {
+  fs.writeFileSync(file);
   var data = fs.readFileSync(inputFile,{encoding: 'utf-8'});
   const repetitions = fs.createWriteStream(file, {
     flags: 'r+',
@@ -18,4 +19,5 @@ module.exports.stringRepeatCheck = function(inputFile, file) {
         repetitions.write(x + ',' + i + '\n');
       }
     });
+  return repeats;
 }

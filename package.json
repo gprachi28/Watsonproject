@@ -15,5 +15,8 @@
     "pug": "^2.0.0-rc.2",
     "serve-favicon": "~2.4.2",
     "watson-developer-cloud": "^2.34.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
   }
 }

@@ -1,8 +1,95 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
-  form(role='form', method='post', enctype='multipart/form-data')
-    input(type='file', name='audioupload')
-    input(type='submit', name='submit', value='Upload Audio')
+
+  header#myHeader.w3-container.w3-theme.w3-padding
+    .w3-center
+      h1.w3-xxxlarge.w3-animate-bottom s...Stutter
+      h4 <i>Powered by IBM Watson</i>
+      .w3-padding-32
+  .w3-row-padding.w3-center.w3-margin-top
+    .w3-third
+      .w3-card-2.w3-container(style='min-height:460px')
+        h3 <b>Our Idea</b>
+        br
+        img(src='https://ak6.picdn.net/shutterstock/videos/6441422/thumb/1.jpg', alt='Idea Bulb', style='width:300px;height:150px;')
+        p Help speech therapists to better analyse stutter
+        p Generate Progress Reports
+        p Create Personal Speech Therapist!
+    .w3-third
+      .w3-card-2.w3-container(style='min-height:460px')
+        h3 <b>How it's done!</b>
+        br
+        img(src='http://colstonconsulting.co.uk/wp-content/uploads/2016/05/ibm-watson.png', alt='IBM Watson Logo', style='width:200px;height:160px;')
+        p Input Audio
+        p Speech-to-Text
+        p Check Grammar
+    .w3-third
+      .w3-card-2.w3-container(style='min-height:460px')
+        h3 <b>What you get!</b>
+        br
+        img(src='https://www.e-architect.co.uk/images/jpgs/architects/exit_architects_e090512.jpg', alt='IBM Watson Logo', style='width:150px;height:150px;')
+        p Transcriped Speech
+        p Hesitation Instances
+        p No. of Repetition 
+
+  .w3-row-padding.w3-center.w3-margin-top
+        .w3-center
+          form(role='form', method='post', enctype='multipart/form-data')
+            input(type='file', name='audioupload', class = 'w3-btn w3-theme')
+            p <i>Accepted format: .wav, .flac</i>
+            .w3-row-padding.w3-center.w3-margin-top
+            input(type='submit', name='submit', value='Upload Audio',  onclick="return move();" class = 'w3-button w3-circle w3-large w3-black')
+            .w3-row-padding.w3-center.w3-margin-top
+            .w3-light-gray
+              #myBar.w3-center.w3-padding.w3-theme(style='width:5%') 0%
+              br
+
+  .w3-container            
+    h2.w3-center Results
+    .w3-border
+      .w3-bar.w3-theme
+        button.w3-bar-item.w3-button.testbtn.w3-padding-16(onclick="openCity(event,'London')") Transcript
+        button.w3-bar-item.w3-button.testbtn.w3-padding-16(onclick="openCity(event,'Paris')") Hesitation Marker
+        button.w3-bar-item.w3-button.testbtn.w3-padding-16(onclick="openCity(event,'Tokyo')") Repetitions
+      
+      #London.w3-container.city.w3-animate-opacity
+        h2 Transcript
+        p #{trans}
+      #Paris.tabcontent.w3-container.city.w3-animate-opacity
+        h2 Hesitation Marker
+        p #{hesi}
+      #Tokyo.tabcontent.w3-container.city.w3-animate-opacity
+        h2 Repetitions
+        p #{rep}
+  script.
+    function move() {
+    var elem = document.getElementById("myBar");
+    var width = 5;
+    var id = setInterval(frame, 20);
+    function frame() {
+    if (width == 100) {
+    clearInterval(id);
+    } else {
+    width++;
+    elem.style.width = width + '%';
+    elem.innerHTML = width * 1  + '%';
+    }
+    }
+    }
+    function openCity(evt, cityName) {
+    var i;
+    var x = document.getElementsByClassName("city");
+    for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+    }
+    var activebtn = document.getElementsByClassName("testbtn");
+    for (i = 0; i < x.length; i++) {
+    activebtn[i].className = activebtn[i].className.replace(" w3-dark-grey", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " w3-dark-grey";
+    }
+    var mybtn = document.getElementsByClassName("testbtn")[0];
+    mybtn.click();
+

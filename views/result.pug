@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  h1 <i> </i>
+  p Welcome to #{title}
+  form(role='form', method='post', enctype='multipart/form-data')
+    input(type='file', name='audioupload')
+    input(type='submit', name='submit', value='Upload Audio')
