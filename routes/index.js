@@ -60,8 +60,9 @@ router.post('/', multer({storage: storage}).single('audioupload'),function(req, 
                   
                     const result_transcript = fs.readFileSync('./transcription.txt', {encoding: 'utf-8'});    
                     const result_hesitation = fs.readFileSync('./hesitations.txt', {encoding: 'utf-8'});
-                    const result_repetition = repeatChk.stringRepeatCheck('./transcription.txt', 'repetitions.txt');      
-                    res.render('index',{trans: result_transcript,  hesi: result_hesitation, rep: result_repetition.toString()});  
+                    const result_repetition = repeatChk.stringRepeatCheck('./transcription.txt', 'repetitions.txt');
+                    console.log(result_repetition);      
+                    res.render('index',{trans: result_transcript,  hesi: result_hesitation, rep: JSON.stringify(result_repetition)});  
                 }
             }
         });
