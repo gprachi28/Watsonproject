@@ -8,16 +8,16 @@ module.exports.stringRepeatCheck = function(inputFile, file) {
     defaultEncoding: Buffer
   });
     const string = data;
-    const repeats= [];
+    const words = [];
+    const index = []
     const splitText = string.split(' ');
     splitText.forEach((x,i) => {
       const check = splitText[i + 1];
       if(x === check){
-          repeats.push(
-            { repeatWord: x,
-              index: i});
+        words.push(x.toString());
+        index.push(i);
         repetitions.write(x + ',' + i + '\n');
       }
     });
-  return repeats;
+  return [words, index];
 }

@@ -31,7 +31,7 @@ var storage = multer.diskStorage({
 const recognizeStream = speech_to_text.createRecognizeStream(params);
 
 router.get('/', function(req, res, next){
-  res.render('index', {trans: '', hesi:'', rep:''})
+  res.render('index', {trans: '',  hesi: '', rep: '', repeatInd: '', repeatWords: ['a','b']})
 });
 
 router.post('/', multer({storage: storage}).single('audioupload'),function(req, res) {
@@ -57,12 +57,12 @@ router.post('/', multer({storage: storage}).single('audioupload'),function(req, 
                 });
             } else if (eventName === 'close'){
                 if (x === 1000){
-                  
                     const result_transcript = fs.readFileSync('./transcription.txt', {encoding: 'utf-8'});    
                     const result_hesitation = fs.readFileSync('./hesitations.txt', {encoding: 'utf-8'});
-                    const result_repetition = repeatChk.stringRepeatCheck('./transcription.txt', 'repetitions.txt');
-                    console.log(result_repetition);      
-                    res.render('index',{trans: result_transcript,  hesi: result_hesitation, rep: JSON.stringify(result_repetition)});  
+                    const temp = repeatChk.stringRepeatCheck('./transcription.txt', 'repetitions.txt');
+                    let words = temp[0];
+                    const indicex = temp[1];
+                    res.render('index',{trans: result_transcript,  hesi: result_hesitation, rep: indicex, repeatInd: indicex, repeatWords: words});  
                 }
             }
         });
